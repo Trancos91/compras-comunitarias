@@ -1,0 +1,7 @@
+backend/secretos/
+backend/__pycache__/
+backend/venv/
+info-parametros/
+material-no-relevante/
+reciclaje/
+.DS_Store/

@@ -1,0 +1,68 @@
+<!doctype html>
+<head>
+  <title>Burbuja latina - compras comunitarias</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <ul class="ul-navbar">
+    <li class="li-navbar">
+      <a href="index.html">Inicio</a>
+    </li>
+    <li class="li-navbar">
+      <a href="juanito.html">Juanito</a>
+    </li>
+    <li class="li-navbar">
+      <a href="burbuja.html" class="activo-navbar">Burbuja</a>
+    </li>
+    <li class="li-navbar" style="float: right">
+      <a
+        href="https://docs.google.com/spreadsheets/d/1pBrTLR4Jv9OsvZRNQo76Cqa7dt9zYUgwk15r3YbY1PY/edit?gid=0#gid=0"
+        >Estado de los pedidos</a
+      >
+    </li>
+  </ul>
+  <div class="container">
+    <main>
+      <h1>Burbuja Latina</h1>
+      <h2>Productos de limpieza</h2>
+      <form autocomplete="off" action=".">
+        <input type="text" placeholder="Filtro" id="casilla-filtro" autofocus />
+      </form>
+      <div class="listado-productos">
+        <table id="tabla-productos"></table>
+      </div>
+      <div class="productos-seleccionados">
+        <!-- <form action="http://127.0.0.1:5000/armar_pedido?tienda=juanito" method="post" class="lista-compras"> -->
+        <form class="lista-compras" id="formulario-compras">
+          <div class="contenedor-seleccion">
+            <div class="forms-selecciones">
+              <fieldset class="tu-nombre">
+                <legend>Tu nombre:</legend>
+                <input type="text" name="nombre" required />
+              </fieldset>
+              <fieldset autocomplete="off">
+                <legend>Productos</legend>
+                <table
+                  id="lista-seleccionados"
+                  class="lista-seleccionados"
+                ></table>
+              </fieldset>
+              <input
+                type="submit"
+                value="Armar pedido"
+                id="boton-armar-pedido"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  <script
+    src="main.js"
+    url-api="http://127.0.0.1:5000/api/productos?productos=burbuja_latina"
+    url-post="burbuja"
+  ></script>
+</body>
