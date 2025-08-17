@@ -397,7 +397,7 @@ function enviarFormulario() {
     }
     try {
       const response = await fetch(
-        url + "/api/armar_pedido?tienda=" + tiendaApi,
+        url + "/api/generar_pedido?tienda=" + tiendaApi,
         {
           method: "POST",
           body: formData,
