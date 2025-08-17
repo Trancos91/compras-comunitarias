@@ -455,7 +455,7 @@ function enviarFormulario() {
     }
     try {
       const response = await fetch(
-        "https://consumando.acaballito.lat/api/generar_pedido?tienda=" +
+        "https://consumando.acaballito.lat/api/armar_pedido?tienda=" +
           tiendaApi,
         {
           method: "POST",
