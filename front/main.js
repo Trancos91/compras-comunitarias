@@ -300,7 +300,11 @@ function iterarLista(listaPrecios, presentacion) {
         thProductosSeleccionados.textContent = "Producto";
         thPrecioDelProducto.textContent = "Precio";
         thUnidadDePedido.textContent = "Unidad";
-        thCantidadPedida.textContent = "Cantidad";
+        if (window.screen.width <= 450) {
+          thCantidadPedida.textContent = "Cant.";
+        } else {
+          thCantidadPedida.textContent = "Cantidad";
+        }
         thProductosSeleccionados.classList.add("td-producto");
         thUnidadDePedido.classList.add("td-unidad");
         thCantidadPedida.classList.add("td-cantidad");

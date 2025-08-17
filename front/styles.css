@@ -7,15 +7,6 @@
   margin: auto;
 }
 
-@media (max-width: 450px) {
-  .listado-productos {
-    width: 90%;
-  }
-  .tu-nombre {
-    width: 80%;
-  }
-}
-
 .contenedor-naranja {
   width: 75%;
   background-color: #d1a892;
@@ -147,4 +138,42 @@ tr {
 
 body {
   background-color: #92a8d1;
+}
+
+@media (max-width: 450px) {
+  .listado-productos {
+    width: 90%;
+  }
+  .tu-nombre {
+    width: 80%;
+  }
+  .container {
+    width: 98%;
+  }
+  .contenedor-seleccion {
+    display: block;
+    width: 100%;
+    margin: 0;
+  }
+  .fieldset-productos {
+    border: none;
+  }
+  .lista-seleccionados {
+    font-size: 0.85rem;
+  }
+  .td-producto {
+    overflow: auto;
+    text-overflow: clip;
+    width: 45;
+  }
+  .td-unidad {
+    overflow: hidden;
+  }
+  .td-cantidad {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .td-precio {
+    width: 15%;
+  }
 }
