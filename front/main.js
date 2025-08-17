@@ -337,7 +337,8 @@ function iterarLista(listaPrecios, presentacion) {
       btnBorrar.textContent = "❌";
       btnBorrar.style.cursor = "pointer";
       formulario.setAttribute("type", "number");
-      formulario.setAttribute("inputmode", "numeric");
+      formulario.setAttribute("inputmode", "decimal");
+      formulario.setAttribute("lang", "en-US");
       formulario.setAttribute("name", this.id);
       formulario.setAttribute("step", step);
       if (pattern !== null) formulario.setAttribute("pattern", pattern);
