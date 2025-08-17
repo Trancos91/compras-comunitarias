@@ -317,8 +317,6 @@ function iterarLista(listaPrecios, presentacion) {
       let tdCantidad = document.createElement("td");
       let formulario = document.createElement("input");
       let btnBorrar = document.createElement("span");
-      //Contenedor div para cambiar el locale del teclado y usar puntos en los decimales
-      let divLocale = document.createElement("div");
       let step;
       let pattern;
       if (
@@ -339,7 +337,6 @@ function iterarLista(listaPrecios, presentacion) {
       btnBorrar.textContent = "❌";
       btnBorrar.style.cursor = "pointer";
       formulario.setAttribute("type", "number");
-      divLocale.setAttribute("lang", "en-US");
       formulario.setAttribute("name", this.id);
       formulario.setAttribute("step", step);
       if (pattern !== null) formulario.setAttribute("pattern", pattern);
@@ -348,7 +345,6 @@ function iterarLista(listaPrecios, presentacion) {
       formulario.setAttribute("id", "selec" + this.id);
       formulario.setAttribute("class", "input-cantidad");
       formulario.setAttribute("autocomplete", "off");
-      formulario.setAttribute("inputmode", "decimal");
       tdProducto.textContent = capitalizar(listaPrecios[datum][1]);
       tdProducto.setAttribute("title", tdProducto.textContent);
       tdProducto.classList.add("td-producto");
@@ -356,8 +352,7 @@ function iterarLista(listaPrecios, presentacion) {
       tdPrecio.classList.add("td-precio");
       tdUnidad.classList.add("td-unidad");
       tdCantidad.classList.add("td-cantidad");
-      divLocale.append(formulario);
-      tdCantidad.append(divLocale);
+      tdCantidad.append(formulario);
       trProducto.append(tdProducto);
       trProducto.append(tdPrecio);
       trProducto.append(tdUnidad);
