@@ -49,7 +49,7 @@ def consumando():
     response.headers["Access-Control-Allow-Origin"] = "*"
     return response
 
-@app.route("/api/armar_pedido", methods=["POST"])
+@app.route("/api/generar_pedido", methods=["POST"])
 def armar_pedido():
     data = request.form
     print(data)
