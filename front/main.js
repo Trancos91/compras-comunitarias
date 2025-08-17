@@ -337,8 +337,7 @@ function iterarLista(listaPrecios, presentacion) {
       btnBorrar.textContent = "❌";
       btnBorrar.style.cursor = "pointer";
       formulario.setAttribute("type", "number");
-      formulario.setAttribute("inputmode", "decimal");
-      formulario.setAttribute("lang", "en-US");
+      formulario.setAttribute("lang", "en");
       formulario.setAttribute("name", this.id);
       formulario.setAttribute("step", step);
       if (pattern !== null) formulario.setAttribute("pattern", pattern);
@@ -347,6 +346,7 @@ function iterarLista(listaPrecios, presentacion) {
       formulario.setAttribute("id", "selec" + this.id);
       formulario.setAttribute("class", "input-cantidad");
       formulario.setAttribute("autocomplete", "off");
+      formulario.setAttribute("inputmode", "decimal");
       tdProducto.textContent = capitalizar(listaPrecios[datum][1]);
       tdProducto.setAttribute("title", tdProducto.textContent);
       tdProducto.classList.add("td-producto");
