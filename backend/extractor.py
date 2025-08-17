@@ -386,7 +386,7 @@ class ExtractorJuanito:
                 return celda.col
             else:
                 sheet.insert_cols([[nombre]], 4)
-                sheet.update_cell(totales, 4, f"=sum(arrayformula(b2:b{totales-1}*c2:c{totales-1}))")
+                sheet.update_cell(totales, 4, f"=sum(arrayformula(d2:d{totales-1}*c2:c{totales-1}))")
                 return 4
 
         def obtener_productos_pedido(pedido):
