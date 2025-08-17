@@ -1,6 +1,7 @@
 let precios;
 const paramsApi = document.currentScript.getAttribute("url-api");
 const tiendaApi = document.currentScript.getAttribute("url-post");
+var url;
 
 const tabla = document.getElementById("tabla-productos");
 let rows = [];
@@ -10,30 +11,45 @@ const filtro = document.getElementById("casilla-filtro");
 const listaSeleccionados = document.getElementById("lista-seleccionados");
 const form = document.getElementById("formulario-compras");
 
-fetch("https://consumando.acaballito.lat/api/productos" + paramsApi)
-  .then((response) => response.json())
+fetch("url.txt")
+  .then((res) => res.text())
   .then((data) => {
-    precios = data;
-    armarTabla(precios);
-    poblarx();
-    autocomplete();
-    enviarFormulario();
+    url = data;
+    obtenerDataTablas();
   })
   .catch((error) => {
-    console.error("Error cargando JSON:", error);
-    let trError = document.createElement("tr");
-    let thError = document.createElement("th");
-    let trError2 = document.createElement("tr");
-    let tdError2 = document.createElement("td");
-    thError.textContent =
-      "Hubo un error cargando los datos, intentalo nuevamente más tarde.";
-    tdError2.textContent =
-      "Si el problema persiste, escribile al administrador.";
-    trError.append(thError);
-    trError2.append(tdError2);
-    tabla.append(trError);
-    tabla.append(trError2);
+    console.error("Error buscando el URL en el txt:", error);
   });
+function obtenerDataTablas() {
+  console.log("url:", url);
+  console.log("paramsApi", paramsApi);
+  let urlProductos = url + "/api/productos" + paramsApi;
+  console.log("urlProductos:", urlProductos);
+  fetch(url + "/api/productos" + paramsApi)
+    .then((response) => response.json())
+    .then((data) => {
+      precios = data;
+      armarTabla(precios);
+      poblarx();
+      autocomplete();
+      enviarFormulario();
+    })
+    .catch((error) => {
+      console.error("Error cargando JSON:", error);
+      let trError = document.createElement("tr");
+      let thError = document.createElement("th");
+      let trError2 = document.createElement("tr");
+      let tdError2 = document.createElement("td");
+      thError.textContent =
+        "Hubo un error cargando los datos, intentalo nuevamente más tarde.";
+      tdError2.textContent =
+        "Si el problema persiste, escribile al administrador.";
+      trError.append(thError);
+      trError2.append(tdError2);
+      tabla.append(trError);
+      tabla.append(trError2);
+    });
+}
 
 /* Función que puebla la tabla; se llama cada vez que se reinicia el filtro con
  * los elementos que sean visibles (a los cuales aplique el filtro buscado)*/
@@ -67,19 +83,6 @@ function autocomplete() {
         }
       }
     }
-    //for (row in rows) {
-    //  elemento = rows[row];
-    //  chequeo = String(elemento.textContent).includes(filtro.value);
-    //  chequeoLower = String(elemento.textContent)
-    //    .toLowerCase()
-    //    .includes(filtro.value);
-    //  if (chequeo || chequeoLower) {
-    //    elemento.style.display = "";
-    //    resaltar(elemento.children[0], filtro.value);
-    //  } else {
-    //    elemento.style.display = "none";
-    //  }
-    //}
     esconderHeaders();
   });
 
@@ -170,9 +173,6 @@ function autocomplete() {
     }
   }
 }
-/*Parece que acá falta una llave
- * =============================
- */
 function armarTabla(precios) {
   let categoría;
   // Construye la tabla por cada categoría, indicando su presentación
@@ -238,8 +238,6 @@ function iterarLista(listaPrecios, presentacion) {
       }
       categorías[categoría]["headerRows"].push(trHeader);
       categorías[categoría]["headerRows"].push(trHeader2);
-      //tabla.append(trHeader);
-      //tabla.append(trHeader2);
     }
     let tr = document.createElement("tr");
     tr.id = listaPrecios[datum][0];
@@ -277,13 +275,10 @@ function iterarLista(listaPrecios, presentacion) {
     rows.push(tr);
     if (precio_minoritario == true) {
     }
-    //tabla.append(tr);
-    //
     // Código para el funcionamiento de las filas:
     // Con cada click se agrega un nuevo ítem a la lista de
     // elementos seleccionados, con una cruz para eliminarlos
     tr.addEventListener("click", function (e) {
-      /*insert the value for the autocomplete text field:*/
       let chequeoHeaders = document.getElementById(
         "th-productos-seleccionados",
       );
@@ -320,10 +315,7 @@ function iterarLista(listaPrecios, presentacion) {
       let tdPrecio = document.createElement("td");
       let tdUnidad = document.createElement("td");
       let tdCantidad = document.createElement("td");
-      //let li = document.createElement("li");
-      //let label = document.createElement("label");
       let formulario = document.createElement("input");
-      //let spanPresentacion = document.createElement("span");
       let btnBorrar = document.createElement("span");
       let step;
       let pattern;
@@ -344,7 +336,6 @@ function iterarLista(listaPrecios, presentacion) {
       }
       btnBorrar.textContent = "❌";
       btnBorrar.style.cursor = "pointer";
-      //p.setAttribute("display", "inline-block");
       formulario.setAttribute("type", "number");
       formulario.setAttribute("name", this.id);
       formulario.setAttribute("step", step);
@@ -372,57 +363,8 @@ function iterarLista(listaPrecios, presentacion) {
         this.parentElement.remove();
       });
     });
-    //if (precio_minoritario == true) {
-    //  trMayorista.addEventListener("click", function (e) {
-    //    /*insert the value for the autocomplete text field:*/
-    //    let li = document.createElement("li");
-    //    let label = document.createElement("label");
-    //    let formulario = document.createElement("input");
-    //    let spanPresentacion = document.createElement("span");
-    //    let btnBorrar = document.createElement("span");
-    //    if (presentacion === "granel") {
-    //      spanPresentacion.textContent = " Kg.";
-    //    } else {
-    //      spanPresentacion.textContent = " unidad/es";
-    //    }
-    //    btnBorrar.textContent = "❌";
-    //    btnBorrar.style.cursor = "pointer";
-    //    //p.setAttribute("display", "inline-block");
-    //    formulario.setAttribute("type", "number");
-    //    formulario.setAttribute("name", this.id);
-    //    formulario.setAttribute("step", 0.05);
-    //    formulario.setAttribute("min", 0);
-    //    formulario.setAttribute("required", true);
-    //    formulario.setAttribute("id", "selec" + this.id);
-    //    formulario.setAttribute("class", "input-cantidad");
-    //    label.innerHTMj =
-    //      capitalizar(listaPrecios[datum][1]) + " <b>5 LITROS</b>" + ": ";
-    //    label.setAttribute("for", "selec" + this.id);
-    //    label.setAttribute("display", "inline-block");
-    //    label.append(formulario);
-    //    li.append(label);
-    //    li.append(spanPresentacion);
-    //    li.append(btnBorrar);
-    //    listaSeleccionados.append(li);
-    //    btnBorrar.addEventListener("click", function (e) {
-    //      this.parentElement.remove();
-    //    });
-    //    /*Falta código que inserte el ID en la lista que se va a ir
-    //    armando */
-    //  });
-    //}
   }
 }
-
-/*function filtrar(texto) {
-  for (let i; i < rows.length; i++) {
-    if (rows[i].childNodes[0].innerHTML.contains(texto)) {
-      esconderRow(rows[i].id);
-    } else {
-      mostrarRow(rows[i].id);
-    }
-  }
-}*/
 
 function esconderRow(id) {
   let elemento = document.getElementById(id);
@@ -455,8 +397,7 @@ function enviarFormulario() {
     }
     try {
       const response = await fetch(
-        "https://consumando.acaballito.lat/api/armar_pedido?tienda=" +
-          tiendaApi,
+        url + "/api/armar_pedido?tienda=" + tiendaApi,
         {
           method: "POST",
           body: formData,
