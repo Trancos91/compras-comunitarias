@@ -1,5 +1,5 @@
 let precios;
-const urlApi = document.currentScript.getAttribute("url-api");
+const paramsApi = document.currentScript.getAttribute("url-api");
 const tiendaApi = document.currentScript.getAttribute("url-post");
 
 const tabla = document.getElementById("tabla-productos");
@@ -10,7 +10,7 @@ const filtro = document.getElementById("casilla-filtro");
 const listaSeleccionados = document.getElementById("lista-seleccionados");
 const form = document.getElementById("formulario-compras");
 
-fetch(urlApi)
+fetch("https://consumando.acaballito.lat/api/productos" + paramsApi)
   .then((response) => response.json())
   .then((data) => {
     precios = data;
@@ -455,7 +455,8 @@ function enviarFormulario() {
     }
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/armar_pedido?tienda=" + tiendaApi,
+        "https://consumando.acaballito.lat/api/generar_pedido?tienda=" +
+          tiendaApi,
         {
           method: "POST",
           body: formData,
