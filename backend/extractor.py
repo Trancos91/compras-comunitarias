@@ -383,7 +383,9 @@ class ExtractorJuanito:
             celda = sheet.find(nombre, in_row=1, case_sensitive=False)
             totales = sheet.find("Totales", in_column=1).row
             ultima_col = len(sheet.row_values(1)) + 1
+            print(f"Ultima col: {ultima_col}")
             coordenadas_totales = gspread.utils.rowcol_to_a1(ultima_col, totales-1)
+            print(f"Coordenadas totales: {coordenadas_totales}")
             if celda:
                 return celda.col
             else:
