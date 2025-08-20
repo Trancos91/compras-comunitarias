@@ -385,13 +385,14 @@ class ExtractorJuanito:
             ultima_col = len(sheet.row_values(1)) + 1
             print(f"Ultima col: {ultima_col}")
             coordenadas_totales = gspread.utils.rowcol_to_a1(ultima_col, totales-1)
+            comienzo_rango = gspread.utils.rowcol_to_a1(ultima_col, 2)
             print(f"Coordenadas totales: {coordenadas_totales}")
             if celda:
                 return celda.col
             else:
                 # sheet.insert_cols([[nombre]], 4)
                 sheet.update_cell(1, ultima_col, nombre)
-                sheet.update_cell(totales, ultima_col, f"=sum(arrayformula({ultima_col}2:{coordenadas_totales}*c2:c{totales-1}))")
+                sheet.update_cell(totales, ultima_col, f"=sum(arrayformula({comienzo_rango}:{coordenadas_totales}*c2:c{totales-1}))")
                 return ultima_col
 
         def obtener_productos_pedido(pedido):
