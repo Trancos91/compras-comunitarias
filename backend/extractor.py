@@ -382,12 +382,15 @@ class ExtractorJuanito:
             """
             celda = sheet.find(nombre, in_row=1, case_sensitive=False)
             totales = sheet.find("Totales", in_column=1).row
+            ultima_col = len(sheet.row_values(1)) + 1
+            coordenadas_totales = gspread.utils.rowcol_to_a1(ultima_col, totales-1)
             if celda:
                 return celda.col
             else:
-                sheet.insert_cols([[nombre]], 4)
-                sheet.update_cell(totales, 4, f"=sum(arrayformula(d2:d{totales-1}*c2:c{totales-1}))")
-                return 4
+                # sheet.insert_cols([[nombre]], 4)
+                sheet.update_cell(1, ultima_col, nombre)
+                sheet.update_cell(totales, ultima_col, f"=sum(arrayformula({ultima_col}2:{coordenadas_totales}*c2:c{totales-1}))")
+                return ultima_col
 
         def obtener_productos_pedido(pedido):
             """
