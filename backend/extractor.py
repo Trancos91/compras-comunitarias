@@ -371,7 +371,7 @@ class ExtractorJuanito:
                 row_tienda = sheet.find(tienda_actual, case_sensitive=False).row + 1
                 sheet.insert_row([producto[1]], index=row_tienda)
                 sheet.update_cell(row_tienda, col_precio, producto[2].replace("$", "").strip())
-                sheet.update_cell(row_tienda, 2, f'=sum(indirect("d{row_tienda}:{row_tienda}"))')
+                sheet.update_cell(row_tienda, 2, f'=sum($d{row_tienda}:{row_tienda}))')
                 return row_tienda
 
         def obtener_col_persona(nombre):
